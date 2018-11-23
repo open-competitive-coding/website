@@ -2,6 +2,7 @@
 
 import os
 import json
+import sys
 from shutil import copyfile
 
 # Constants
@@ -79,4 +80,4 @@ def json_to_readme(contest_id, contest_data) :
             readme_file.write(content)
 
 if __name__ == "__main__" :
-    add_submission("rohith", "example-B")
+    add_submission(sys.argv[1], sys.argv[2])
