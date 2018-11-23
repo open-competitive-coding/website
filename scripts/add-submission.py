@@ -18,6 +18,7 @@ If there exists a folder, we will modify the README.json and create a new README
 """
 def add_submission(user_id, problem_id) :
     # Problem-Id's will be like 1729-A or 122-B
+    print user_id, problem_id
     contest_id, problem_name = problem_id.split("-")
 
     readme_json_path = contest_id + "/" + readme_json
