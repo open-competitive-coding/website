@@ -4,9 +4,11 @@ import os
 import json
 import sys
 from shutil import copyfile
+from constants import *
 
 # Constants
 readme_json = "README.json"
+readme_md = "README.md"
 template_json = "data/README.json"
 template_submission_json = "data/Submissions.json"
 template_readme = "data/README.md"
@@ -61,12 +63,27 @@ def add_submission(user_id, problem_id) :
 
 
 def create_table_from_submissions(submissions) :
-    table_header_row = """<tr><th>User</th><th>Problems Solved</th><th>Score</th></tr>"""
+    cols = ""
     table_body = ""
+
+    cols += TH.format(data="User")
+    cols += TH.format(data="Problems Solved")
+    cols += TH.format(data="Score")
+
+    table_header_row = TR.format(cols=cols)
+
     for sub in submissions :
-        problems_solved = ", ".join(sub["problems-solved"])
-        table_body += "<tr><td>{user}</td><td>{problems_solved}</td><td>{score}</td></tr>".format(user=sub["user-id"],problems_solved=problems_solved,score=sub["score"])
-    table = "<table>" + table_header_row + table_body + "</table>"
+        # TODO: Convert this to a lin which redirects to the problem itself.
+        problems_solved = ", ".join(sub["problems-solved"]) # This is how we obtain the problems solved string
+
+        cols = ""
+        cols += TD.format(data=ANCHOR.format(href=GITHUB_USER_URL.format(user_id=sub["user-id"]), data=sub["user-id"]))# We add the user-id
+        cols += TD.format(data=problems_solved) # We add the problems solved by the user
+        cols += TD.format(data=sub["score"]) # We add the score
+
+        table_body += TR.format(cols=cols)
+    table = TABLE.format(rows=table_header_row+table_body)
+
     return table
 
 
@@ -77,7 +94,7 @@ def json_to_readme(contest_id, contest_data) :
         content = template_readme_file.read()
         score_table = create_table_from_submissions(contest_data["submissions"])
         content = content.format(contest_id=contest_id, score_table=score_table)
-        with open(contest_id + "/" + "README.md", "w") as readme_file :
+        with open(contest_id + "/" + readme_md, "w") as readme_file :
             readme_file.write(content)
 
 if __name__ == "__main__" :
