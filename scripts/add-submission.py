@@ -12,6 +12,7 @@ readme_md = "README.md"
 template_json = "data/README.json"
 template_submission_json = "data/Submissions.json"
 template_readme = "data/README.md"
+contest_prefix = "contest-"
 
 """
 First we will check if the contest for the problem exists.
@@ -23,11 +24,11 @@ def add_submission(user_id, problem_id) :
     print user_id, problem_id
     contest_id, problem_name = problem_id.split("-")
 
-    readme_json_path = contest_id + "/" + readme_json
+    readme_json_path = contest_prefix+contest_id + "/" + readme_json
 
     # Checking whether folder exists.
-    if not os.path.isdir(contest_id) :
-        os.mkdir(contest_id)
+    if not os.path.isdir(contest_prefix+contest_id) :
+        os.mkdir(contest_prefix+contest_id)
 
         # We will copy a template json
         copyfile(template_json, readme_json_path)
@@ -94,7 +95,7 @@ def json_to_readme(contest_id, contest_data) :
         content = template_readme_file.read()
         score_table = create_table_from_submissions(contest_data["submissions"])
         content = content.format(contest_id=contest_id, score_table=score_table)
-        with open(contest_id + "/" + readme_md, "w") as readme_file :
+        with open(contest_prefix + contest_id + ".md", "w") as readme_file :
             readme_file.write(content)
 
 if __name__ == "__main__" :

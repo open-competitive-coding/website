@@ -1,4 +1,4 @@
-# {contest_id}
+# Contest - {contest_id}
 
 # Scoreboard
 
