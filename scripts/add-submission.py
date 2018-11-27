@@ -12,7 +12,7 @@ readme_md = "README.md"
 template_json = "data/README.json"
 template_submission_json = "data/Submissions.json"
 template_readme = "data/README.md"
-contest_prefix = "contest-"
+contest_prefix = "Contest-"
 
 """
 First we will check if the contest for the problem exists.
