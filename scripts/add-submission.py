@@ -11,7 +11,7 @@ readme_json = "README.json"
 readme_md = "README.md"
 template_json = "data/README.json"
 template_submission_json = "data/Submissions.json"
-template_readme = "data/README.md"
+template_readme = "data/Template-Contest.md"
 contest_prefix = "Contest-"
 
 """
