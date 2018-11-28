@@ -76,6 +76,10 @@ def create_table_from_submissions(submissions) :
     for sub in submissions :
         # TODO: Convert this to a lin which redirects to the problem itself.
         problems_solved = ", ".join(sub["problems-solved"]) # This is how we obtain the problems solved string
+        problems_solved = ""
+        for problem in sub["problems-solved"] :
+            contest_id,problem_id = problem.split("-")
+            problems_solved += ANCHOR.format(href=GITHUB_PROBLEM_URL.format(contest_id=contest_id,problem_id=problem_id), data=problem)
 
         cols = ""
         cols += TD.format(data=ANCHOR.format(href=GITHUB_USER_URL.format(user_id=sub["user-id"]), data=sub["user-id"]))# We add the user-id
